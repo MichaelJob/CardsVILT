@@ -5,13 +5,13 @@
       <Link class="text-indigo-400 hover:text-indigo-600" href="/cards">Cards</Link>
       <span class="text-indigo-400 font-medium">/</span> Create
     </h1>
-    <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
+    <div class="max-w-8xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="store">
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
           <text-input v-model="form.main_subject" :error="form.errors.main_subject" class="pb-8 pr-6 w-full lg:w-1/2" label="mainsubject" />
           <text-input v-model="form.subject" :error="form.errors.subject" class="pb-8 pr-6 w-full lg:w-1/2" label="subject" />
-          <text-input v-model="form.front" :error="form.errors.front" class="pb-8 pr-6 w-full lg:w-1/2" label="front" />
-          <text-input v-model="form.back" :error="form.errors.back" class="pb-8 pr-6 w-full lg:w-1/2" label="back" />
+          <text-input ref="front" v-model="form.front" :error="form.errors.front" class="pb-8 pr-6 w-full" label="front" />
+          <text-input v-model="form.back" :error="form.errors.back" class="pb-8 pr-6 w-full" label="back" />
         </div>
         <div class="flex items-center justify-end px-8 py-4 bg-gray-50 border-t border-gray-100">
           <loading-button :loading="form.processing" class="btn-indigo" type="submit">Store and create next card</loading-button>
@@ -50,6 +50,7 @@ export default {
       this.form.post('/cards')
       this.form.front = null
       this.form.back = null
+      this.$refs.front.focus()
     },
   },
 }
