@@ -17,7 +17,7 @@ class CardsController extends Controller
             'cards' => Auth::user()->account->cards()
                 ->orderBy('id')
                 ->filter(Request::only('search', 'trashed'))
-                ->paginate(10)
+                ->paginate(6)
                 ->withQueryString()
                 ->through(fn ($card) => [
                     'id' => $card->id,

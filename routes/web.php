@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\CardsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\LearnController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,7 +68,13 @@ Route::put('users/{user}/restore', [UsersController::class, 'restore'])
     ->name('users.restore')
     ->middleware('auth');
 
-// Organizations
+// Learn
+
+Route::get('learn', [LearnController::class, 'index'])
+    ->name('learn')
+    ->middleware('auth');
+
+// Cards
 
 Route::get('cards', [CardsController::class, 'index'])
     ->name('cards')
