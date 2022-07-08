@@ -35,7 +35,7 @@
 import { Head } from '@inertiajs/inertia-vue3'
 import pickBy from 'lodash/pickBy'
 import LayoutGuest from '@/Shared/LayoutGuest'
-import throttle from 'lodash/throttle'
+import debounce from 'lodash/debounce'
 import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination'
 import Search from '@/Shared/Search'
@@ -63,9 +63,9 @@ export default {
   watch: {
     form: {
       deep: true,
-      handler: throttle(function () {
-        this.$inertia.get('/learn', pickBy(this.form), { preserveState: true })
-      }, 150),
+      handler: debounce(function () {
+        this.$inertia.get('/', pickBy(this.form), { preserveState: false })
+      }, 750),
     },
   },
   methods: {

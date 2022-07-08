@@ -1,7 +1,7 @@
 <template>
   <div>
     <Head title="Cards" />
-    <h1 class="mb-8 text-3xl font-bold">Cards</h1>
+    <h1 class="mb-8 text-3xl font-bold">{{ listCount }} of {{ cardCount }} Cards</h1>
     <div class="flex items-center justify-between mb-6">
       <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
         <label class="block text-gray-700">Trashed:</label>
@@ -65,7 +65,7 @@ import { Head, Link } from '@inertiajs/inertia-vue3'
 import Icon from '@/Shared/Icon'
 import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout'
-import throttle from 'lodash/throttle'
+import debounce from 'lodash/debounce'
 import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination'
 import SearchFilter from '@/Shared/SearchFilter'
@@ -82,6 +82,8 @@ export default {
   props: {
     filters: Object,
     cards: Object,
+    cardscount: Number,
+    listcount: Number,
   },
   data() {
     return {
@@ -89,14 +91,16 @@ export default {
         search: this.filters.search,
         trashed: this.filters.trashed,
       },
+      cardCount: this.cardscount,
+      listCount: this.listcount,
     }
   },
   watch: {
     form: {
       deep: true,
-      handler: throttle(function () {
-        this.$inertia.get('/cards', pickBy(this.form), { preserveState: true })
-      }, 150),
+      handler: debounce(function () {
+        this.$inertia.get('/cards', pickBy(this.form), { preserveState: false })
+      }, 500),
     },
   },
   methods: {

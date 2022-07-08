@@ -30,7 +30,7 @@ class LearnController extends Controller
 
     public function indexguest()
     {
-        return Inertia::render('Learn/IndexGuest', [
+        return Inertia::render('Learn/Indexguest', [
             'filters' => Request::all('search', 'trashed'),
             'cards' => Card::where('deleted_at', null)
                 ->orderBy('id')

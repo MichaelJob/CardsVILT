@@ -12,21 +12,25 @@ class CardsController extends Controller
 {
     public function index()
     {
+        $cards = Auth::user()->account->cards()
+            ->orderBy('id')
+            ->filter(Request::only('search', 'trashed'))
+            ->paginate(10)
+            ->withQueryString()
+            ->through(fn ($card) => [
+                'id' => $card->id,
+                'main_subject' => $card->main_subject,
+                'subject' => $card->subject,
+                'front' => $card->front,
+                'back' => $card->back,
+                'deleted_at' => $card->deleted_at,
+            ]);
+
         return Inertia::render('Cards/Index', [
             'filters' => Request::all('search', 'trashed'),
-            'cards' => Auth::user()->account->cards()
-                ->orderBy('id')
-                ->filter(Request::only('search', 'trashed'))
-                ->paginate(6)
-                ->withQueryString()
-                ->through(fn ($card) => [
-                    'id' => $card->id,
-                    'main_subject' => $card->main_subject,
-                    'subject' => $card->subject,
-                    'front' => $card->front,
-                    'back' => $card->back,
-                    'deleted_at' => $card->deleted_at,
-                ]),
+            'cards' => $cards,
+            'cardscount' => Auth::user()->account->cards()->count(),   
+            'listcount' => $cards->total(),
         ]);
     }
 

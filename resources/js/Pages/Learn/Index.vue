@@ -6,23 +6,23 @@
       <search v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset" />
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
-      <table class="w-full whitespace-nowrap">
+        <table class="w-full whitespace-pre-wrap leading-normal">
         <tbody>
           <tr v-for="card in cards.data" :key="card.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
-            <td v-if="showFront" class="border-t flex items-center p-24" colspan="4" @click="showFront=false">
+            <td v-if="showFront" class="border-t flex items-center lg:p-24 h-64" @click="showFront=false">
               {{ card.front }}
             </td>
-            <td v-else class="border-t flex items-center p-24" colspan="4" @click="showFront=true">
+            <td v-else class="border-t flex items-center lg:p-24 h-64" @click="showFront=true">
               {{ card.back }}
             </td>
           </tr>
           <tr v-for="card in cards.data" :key="card.id">
-            <td class="lg:pl-24 p-4 border-t" colspan="4">
+            <td class="lg:pl-24 p-4 border-t">
               {{ card.main_subject }} / {{ card.subject }}
             </td>
           </tr>
           <tr v-if="cards.data.length === 0">
-            <td class="px-6 py-4 border-t" colspan="4">No card found.</td>
+            <td class="px-6 py-4 border-t">No card found.</td>
           </tr>
         </tbody>
       </table>
@@ -35,7 +35,7 @@
 import { Head } from '@inertiajs/inertia-vue3'
 import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout'
-import throttle from 'lodash/throttle'
+import debounce from 'lodash/debounce'
 import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination'
 import Search from '@/Shared/Search'
@@ -63,9 +63,9 @@ export default {
   watch: {
     form: {
       deep: true,
-      handler: throttle(function () {
-        this.$inertia.get('/learn', pickBy(this.form), { preserveState: true })
-      }, 150),
+      handler: debounce(function () {
+        this.$inertia.get('/learn', pickBy(this.form), { preserveState: false })
+      }, 500),
     },
   },
   methods: {
