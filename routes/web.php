@@ -34,8 +34,20 @@ Route::delete('logout', [AuthenticatedSessionController::class, 'destroy'])
 
 // Dashboard
 
-Route::get('/', [DashboardController::class, 'index'])
+
+Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard')
+    ->middleware('auth');
+
+
+// Learn
+
+Route::get('/', [LearnController::class, 'indexguest'])
+    ->name('learnguest')
+    ->middleware('guest');
+
+Route::get('learn', [LearnController::class, 'index'])
+    ->name('learn')
     ->middleware('auth');
 
 // Users
@@ -66,12 +78,6 @@ Route::delete('users/{user}', [UsersController::class, 'destroy'])
 
 Route::put('users/{user}/restore', [UsersController::class, 'restore'])
     ->name('users.restore')
-    ->middleware('auth');
-
-// Learn
-
-Route::get('learn', [LearnController::class, 'index'])
-    ->name('learn')
     ->middleware('auth');
 
 // Cards

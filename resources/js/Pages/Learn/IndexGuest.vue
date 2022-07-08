@@ -34,7 +34,7 @@
 <script>
 import { Head } from '@inertiajs/inertia-vue3'
 import pickBy from 'lodash/pickBy'
-import Layout from '@/Shared/Layout'
+import LayoutGuest from '@/Shared/LayoutGuest'
 import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination'
@@ -46,7 +46,7 @@ export default {
     Pagination,
     Search,
   },
-  layout: Layout,
+  layout: LayoutGuest,
   props: {
     filters: Object,
     cards: Object,
