@@ -1,8 +1,7 @@
 <template>
   <div>
     <Head title="Dashboard" />
-    <h1 class="mb-8 text-3xl font-bold">Dashboard</h1>
-    <p class="mb-8 leading-normal">Welcome to Cards by <a class="text-indigo-500 hover:text-orange-600 underline" href="https://michaeljob.ch">michaeljob.ch</a>.</p>
+    <h1 class="mb-8 text-xl">Cards, huh?</h1>
   </div>
 </template>
 

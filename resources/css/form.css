@@ -34,3 +34,13 @@
 .form-error {
   @apply text-red-700 mt-2 text-sm;
 }
+
+.cardbg { 
+  background: -webkit-linear-gradient(300deg, rgba(190, 220, 255, 0.1) 0%, rgba(190, 220, 255, 0.2) 33%, rgb(170, 200, 255, 0.9) 100%); 
+  background-attachment:fixed;
+}
+
+.invcardbg { 
+  background: -webkit-linear-gradient(150deg, rgba(190, 220, 255, 0.1) 0%, rgba(190, 220, 255, 0.2) 66%, rgb(170, 200, 255, 0.9) 100%); 
+  background-attachment:fixed;
+}

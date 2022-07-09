@@ -31,4 +31,12 @@ class Card extends Model
             }
         });
     }
+
+    public function scopeLearn($query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $query->where('subject', 'like', '%'.$search.'%')
+                ->orWhere('main_subject', 'like', '%'.$search.'%');
+        });
+    }
 }

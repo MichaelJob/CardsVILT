@@ -13,7 +13,7 @@ class LearnController extends Controller
         return Inertia::render('Learn/Index', [
             'filters' => Request::all('search', 'trashed'),
             'cards' => Card::where('deleted_at', null)
-                ->orderBy('id')
+                ->inRandomOrder()
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate(1)
                 ->withQueryString()
@@ -33,8 +33,8 @@ class LearnController extends Controller
         return Inertia::render('Learn/Indexguest', [
             'filters' => Request::all('search', 'trashed'),
             'cards' => Card::where('deleted_at', null)
-                ->orderBy('id')
-                ->filter(Request::only('search', 'trashed'))
+                ->inRandomOrder()
+                ->learn(Request::only('search', 'trashed'))
                 ->paginate(1)
                 ->withQueryString()
                 ->through(fn ($card) => [

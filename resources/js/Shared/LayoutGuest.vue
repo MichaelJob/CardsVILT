@@ -3,10 +3,11 @@
     <div class="md:flex md:flex-col">
       <div class="md:flex md:flex-col md:h-screen">
         <div class="md:flex md:flex-shrink-0 bg-indigo-900">
-          <div class="flex items-center justify-between px-6 py-4  md:flex-shrink-0 md:justify-center md:w-56">
+          <div class="flex items-center justify-between px-6 py-4">
             <Link class="mt-1" href="/login">
               <logo class="fill-white" width="120" height="120" />
             </Link>
+            <p class="m-4 p-4 text-xl text-white">Cards by <a class="text-indigo-300 hover:text-indigo-100" href="https://michaeljob.ch">michaeljob.ch</a></p>
           </div>
         </div>
         <div class="md:flex md:flex-grow md:overflow-hidden">

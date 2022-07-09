@@ -13,7 +13,7 @@ class CardsController extends Controller
     public function index()
     {
         $cards = Auth::user()->account->cards()
-            ->orderBy('id')
+            ->orderBy('id', 'desc')
             ->filter(Request::only('search', 'trashed'))
             ->paginate(10)
             ->withQueryString()
