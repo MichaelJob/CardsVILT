@@ -10,9 +10,23 @@
           <tr v-for="card in cards.data" :key="card.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
             <td v-if="showFront" class="border-t flex items-center p-6 lg:p-24 h-64 cardbg" @click="showFront=false">
               {{ card.front }}
+              <img
+                v-if="card.front_photo"
+                class="inline w-64 h-64 p-6" 
+                :src="card.front_photo"
+                alt="front-photo"
+                @error="$event.target.src = '../../images/notfound.png'"
+              />
             </td>
             <td v-else class="border-t flex items-center p-6 lg:p-24 h-64 invcardbg" @click="showFront=true">
               {{ card.back }}
+              <img
+                v-if="card.back_photo"
+                class="inline w-64 h-64 p-6" 
+                :src="card.back_photo"
+                alt="back-photo"
+                @error="$event.target.src = '../../images/notfound.png'"
+              />
             </td>
           </tr>
           <tr v-for="card in cards.data" :key="card.id">

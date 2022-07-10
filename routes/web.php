@@ -98,7 +98,7 @@ Route::get('cards/{card}/edit', [CardsController::class, 'edit'])
     ->name('cards.edit')
     ->middleware('auth');
 
-Route::put('cards/{card}', [CardsController::class, 'update'])
+Route::post('cards/{card}', [CardsController::class, 'update'])
     ->name('cards.update')
     ->middleware('auth');
 
@@ -109,6 +109,9 @@ Route::delete('cards/{card}', [CardsController::class, 'destroy'])
 Route::put('cards/{card}/restore', [CardsController::class, 'restore'])
     ->name('cards.restore')
     ->middleware('auth');
+
+Route::delete('cards/{card}/delete/{front}', [CardsController::class, 'deleteimg'])
+    ->name('cards.deleteimg');
 
 // Images
 
