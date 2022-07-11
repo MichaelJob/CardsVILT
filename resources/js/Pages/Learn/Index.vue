@@ -2,7 +2,11 @@
   <div>
     <Head title="Learn" />
     <h1 class="mb-8 text-3xl font-bold">Learn with Cards</h1>
-    <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center justify-between py-6">
+      <select v-model="form.topic" class="form-select mr-4 py-3 w-full">
+        <option :value="null">all cards</option>
+        <option v-for="topic in topics" :key="topic" :value="topic.subject">{{ topic.subject }} ({{ topic.total }})</option>
+      </select>
       <search v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset" />
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
@@ -64,12 +68,13 @@ export default {
   props: {
     filters: Object,
     cards: Object,
+    topics: Object,
   },
   data() {
     return {
       form: {
         search: this.filters.search,
-        trashed: this.filters.trashed,
+        topic: this.filters.topic,
       },
       showFront: true,
     }

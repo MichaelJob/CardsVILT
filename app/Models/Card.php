@@ -35,8 +35,10 @@ class Card extends Model
     public function scopeLearn($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('subject', 'like', '%'.$search.'%')
-                ->orWhere('main_subject', 'like', '%'.$search.'%');
+            $query->where('front', 'like', '%'.$search.'%')
+                ->orWhere('back', 'like', '%'.$search.'%');
+        })->when($filters['topic'] ?? null, function ($query, $topic) {
+            $query->where('subject', 'like', $topic);
         });
     }
 }
