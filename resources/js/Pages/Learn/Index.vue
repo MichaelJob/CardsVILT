@@ -4,7 +4,7 @@
     <h1 class="mb-8 text-3xl font-bold">Learn with Cards</h1>
     <div class="flex items-center justify-between py-6">
       <select v-model="form.topic" class="form-select mr-4 py-3 w-full">
-        <option :value="null">all cards</option>
+        <option :value="null">all cards ({{ cards.total }})</option>
         <option v-for="topic in topics" :key="topic" :value="topic.subject">{{ topic.subject }} ({{ topic.total }})</option>
       </select>
       <search v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset" />
