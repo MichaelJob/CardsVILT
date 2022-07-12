@@ -47,10 +47,13 @@ export default {
   },
   methods: {
     store() {
-      this.form.post('/cards')
-      this.form.front = null
-      this.form.back = null
-      this.$refs.front.focus()
+      this.form.post('/cards', {
+        onSuccess: () => {
+          this.form.front = null
+          this.form.back = null
+          this.$refs.front.focus()
+        },
+      })
     },
   },
 }

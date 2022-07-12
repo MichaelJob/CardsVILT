@@ -43,7 +43,7 @@ class CardsController extends Controller
 
     public function store()
     {
-        Auth::user()->account->Cards()->create(
+        $success = Auth::user()->account->Cards()->create(
             Request::validate([
                 'main_subject' => ['required', 'max:255'],
                 'subject' => ['nullable', 'max:255'],
@@ -52,7 +52,13 @@ class CardsController extends Controller
             ])
         );
 
-        return Inertia::render('Cards/Create');
+        if ($success instanceof Card) {
+            //create next card
+            return Inertia::render('Cards/Create');
+        } else {
+            //return with error
+            return Redirect::back();
+        }
     }
 
     public function edit(Card $card)
