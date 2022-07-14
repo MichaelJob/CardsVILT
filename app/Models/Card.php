@@ -29,6 +29,8 @@ class Card extends Model
             } elseif ($trashed === 'only') {
                 $query->onlyTrashed();
             }
+        })->when($filters['topic'] ?? null, function ($query, $topic) {
+            $query->where('subject', 'like', $topic);
         });
     }
 

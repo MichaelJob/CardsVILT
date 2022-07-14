@@ -13,10 +13,10 @@ class LearnController extends Controller
     public function index()
     {
         return Inertia::render('Learn/Index', [
-            'filters' => Request::all('search', 'topic'),
+            'filters' => Request::all('search', 'trashed', 'topic'),
             'cards' => Card::where('deleted_at', null)
                 ->inRandomOrder()
-                ->filter(Request::only('search', 'topic'))
+                ->filter(Request::only('search', 'trashed', 'topic'))
                 ->paginate(1)
                 ->withQueryString()
                 ->through(fn ($card) => [

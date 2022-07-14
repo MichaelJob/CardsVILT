@@ -7,6 +7,7 @@
         <option :value="null">all cards ({{ cards.total }})</option>
         <option v-for="topic in topics" :key="topic" :value="topic.subject">{{ topic.subject }} ({{ topic.total }})</option>
       </select>
+      <p class="mr-4">or</p>
       <search v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset" />
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
