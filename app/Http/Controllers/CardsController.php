@@ -43,7 +43,7 @@ class CardsController extends Controller
 
     public function store()
     {
-        $success = Auth::user()->account->Cards()->create(
+        $card = Auth::user()->account->Cards()->create(
             Request::validate([
                 'main_subject' => ['required', 'max:255'],
                 'subject' => ['nullable', 'max:255'],
@@ -52,7 +52,14 @@ class CardsController extends Controller
             ])
         );
 
-        if ($success instanceof Card) {
+        if ($card instanceof Card) {
+            //store pictures if card was created
+            if (Request::file('front_photo')) {
+                $card->update(['front_photo_path' => Request::file('front_photo')->store(Auth::user()->account->id.'/cards')]);
+            }
+            if (Request::file('back_photo')) {
+                $card->update(['back_photo_path' => Request::file('back_photo')->store(Auth::user()->account->id.'/cards')]);
+            }
             //create next card
             return Inertia::render('Cards/Create');
         } else {

@@ -12,6 +12,8 @@
           <text-input v-model="form.subject" :error="form.errors.subject" class="pb-8 pr-6 w-full lg:w-1/2" label="subject" />
           <text-input ref="front" v-model="form.front" :error="form.errors.front" class="pb-8 pr-6 w-full" label="front" />
           <text-input v-model="form.back" :error="form.errors.back" class="pb-8 pr-6 w-full" label="back" />
+          <file-input v-model="form.front_photo" :error="form.errors.front_photo" class="pr-6 pb-8" type="file" accept="image/*" :label="'Front photo'" />
+          <file-input v-model="form.back_photo" :error="form.errors.back_photo" class="pr-6 pb-8" type="file" accept="image/*" :label="'Back photo'" />
         </div>
         <div class="flex items-center justify-end px-8 py-4 bg-gray-50 border-t border-gray-100">
           <loading-button :loading="form.processing" class="btn-indigo" type="submit">Store and create next card</loading-button>
@@ -26,6 +28,7 @@ import { Head, Link } from '@inertiajs/inertia-vue3'
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
 import LoadingButton from '@/Shared/LoadingButton'
+import FileInput from '@/Shared/FileInput'
 
 export default {
   components: {
@@ -33,6 +36,7 @@ export default {
     Link,
     LoadingButton,
     TextInput,
+    FileInput,
   },
   layout: Layout,
   data() {
@@ -42,6 +46,8 @@ export default {
         subject: null,
         front: null,
         back: null,
+        front_photo: null,
+        back_photo: null,
       }),
     }
   },
@@ -51,6 +57,8 @@ export default {
         onSuccess: () => {
           this.form.front = null
           this.form.back = null
+          this.front_photo = null
+          this.back_photo = null
           this.$refs.front.focus()
         },
       })
