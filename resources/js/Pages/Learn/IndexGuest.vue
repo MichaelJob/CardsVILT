@@ -4,7 +4,7 @@
     <div class="flex items-center justify-between mb-6">
       <div class="flex items-center justify-between py-6">
         <select v-model="form.topic" class="form-select mr-4 py-3 w-full">
-          <option :value="null">all cards ({{ cards.total }})</option>
+          <option :value="null">Alle Karten ({{ totalcount }})</option>
           <option v-for="topic in topics" :key="topic" :value="topic.subject">{{ topic.subject }} ({{ topic.total }})</option>
         </select>
         <p class="mr-4">or</p>
@@ -71,6 +71,7 @@ export default {
     filters: Object,
     cards: Object,
     topics: Object,
+    totalcount: Object,
   },
   data() {
     return {

@@ -33,6 +33,7 @@ class LearnController extends Controller
                     ->select('subject', DB::raw('count(*) as total'))
                     ->groupBy('subject')
                     ->get(),
+                'totalcount' => Card::where('deleted_at', null)->count()
         ]);
     }
 
@@ -59,6 +60,7 @@ class LearnController extends Controller
                 ->select('subject', DB::raw('count(*) as total'))
                 ->groupBy('subject')
                 ->get(),
+            'totalcount' => Card::where('deleted_at', null)->count()
         ]);
     }
 }
