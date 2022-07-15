@@ -70,6 +70,7 @@ export default {
     filters: Object,
     cards: Object,
     topics: Object,
+    totalcount: Object,
   },
   data() {
     return {
