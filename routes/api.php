@@ -24,7 +24,7 @@ Route::group(
     function () {
 
         Route::apiResource('apicards', CardsApiController::class)
-            ->middleware('api');
+            ->middleware('auth:api');
 
     }
 );

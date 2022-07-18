@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class UsersController extends Controller
 {
@@ -53,6 +54,7 @@ class UsersController extends Controller
             'last_name' => Request::get('last_name'),
             'email' => Request::get('email'),
             'password' => Request::get('password'),
+            'api_token' => Str::random(80),
             'owner' => Request::get('owner'),
             'photo_path' => Request::file('photo') ? Request::file('photo')->store('users') : null,
         ]);
